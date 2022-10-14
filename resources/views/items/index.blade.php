@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="col-2">
-                <a href="https://{{$item->url}}">{{ $item->url }}</a>
+                <a href="{{$item->url}}" target="_blank">{{ $item->url }}</a>
             </div>
             <div class="col-1">
                 {{ $item->price }}
