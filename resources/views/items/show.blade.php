@@ -13,7 +13,7 @@
     <div class="row mb-5">
         <div class="col-12">
             <p class="h5 pb-3"><strong>Name: </strong> {{$item->name}}</p>
-            <p class="h5 pb-3"><strong>Email: </strong> {{$item->url}}</p>
+            <p class="h5 pb-3"><strong>URL: </strong><a href="{{$item->url}}" target="_blank">{{ $item->url }}</a></p>
             <p class="h5 pb-3"><strong>Price: </strong> {{$item->price}}</p>
             <p class="h5 pb-3"><strong>Quantity: </strong> {{$item->qty}}</p>
             <p class="h6 pb-3" style="color: gray;"><strong>Created Time: </strong> {{$item->created_at}}</p>
