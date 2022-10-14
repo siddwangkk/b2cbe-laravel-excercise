@@ -29,6 +29,6 @@ Route::get('items/create', 'ItemsController@create');
 Route::post('items', 'ItemsController@store');
 Route::get('items/{item}', 'ItemsController@show');
 Route::get('items/{item}/edit', 'ItemsController@edit');
-Route::patch('items', 'ItemsController@update');
+Route::patch('items/{item}', 'ItemsController@update');
 Route::delete('items', 'ItemsController@destroy');
 

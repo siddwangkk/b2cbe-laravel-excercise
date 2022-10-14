@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Detail for {{$item->name}}</h1>
-            <p><a href="/itmes/{{ $item->id }}/edit">Edit</a></p>
+            <p><a href="/items/{{ $item->id }}/edit">Edit</a></p>
         </div>
     </div>
 

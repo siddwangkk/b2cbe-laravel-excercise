@@ -32,9 +32,15 @@ class ItemsController extends Controller
         return view('items.show', compact('item'));
     }
 
-    public function edit()
+    public function edit(Item $item)
     {
+        return view('items.edit', compact('item'));
+    }
 
+    public function  update(Item $item)
+    {
+        $item->update($this->validateRequest());
+        return redirect('/items/'. $item->id);
     }
 
     public function delete()
