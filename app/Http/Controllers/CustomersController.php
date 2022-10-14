@@ -16,7 +16,7 @@ class CustomersController extends Controller
         return view('customers.index', compact('customers'));
     }
 
-    public function create(Customer  $customer)
+    public function create(Customer $customer)
     {
         $companies = Company::all();
 

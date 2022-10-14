@@ -26,9 +26,10 @@ class ItemsController extends Controller
         return redirect('items');
     }
 
-    public function show()
+    public function show(Item $item)
     {
 
+        return view('items.show', compact('item'));
     }
 
     public function edit()
