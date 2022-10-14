@@ -24,14 +24,11 @@ Route::patch('customers/{customer}','CustomersController@update');
 
 
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('items', 'ItemsController@index');
+Route::get('items/create', 'ItemsController@create');
+Route::post('items', 'ItemsController@store');
+Route::get('items/{item}', 'ItemsController@show');
+Route::get('items/{item}/edit', 'ItemsController@edit');
+Route::patch('items', 'ItemsController@update');
+Route::delete('items', 'ItemsController@destroy');
 
-//Route::get('contact', function () {
-//    return view('contact');
-//});
-
-//Route::get('about', function () {
-//    return view('about');
-//});
