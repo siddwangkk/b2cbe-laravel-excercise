@@ -40,17 +40,15 @@ class ItemsController extends Controller
     public function  update(Item $item)
     {
         $item->update($this->validateRequest());
+
         return redirect('/items/'. $item->id);
     }
 
-    public function delete()
+    public function destroy(Item $item)
     {
+        $item->delete();
 
-    }
-
-    public function destroy()
-    {
-
+        return redirect('items');
     }
 
     private function validateRequest()

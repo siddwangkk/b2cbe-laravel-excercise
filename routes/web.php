@@ -15,6 +15,8 @@
 Route::view('/', 'home');
 Route::view('contact', 'contact');
 Route::view('about-us', 'about');
+
+// practice customers route
 Route::get('customers', 'CustomersController@index');
 Route::get('customers/create', 'CustomersController@create');
 Route::post('customers', 'CustomersController@store');
@@ -22,13 +24,12 @@ Route::get('customers/{customer}','CustomersController@show');
 Route::get('customers/{customer}/edit','CustomersController@edit');
 Route::patch('customers/{customer}','CustomersController@update');
 
-
-
+// items route
 Route::get('items', 'ItemsController@index');
 Route::get('items/create', 'ItemsController@create');
 Route::post('items', 'ItemsController@store');
 Route::get('items/{item}', 'ItemsController@show');
 Route::get('items/{item}/edit', 'ItemsController@edit');
 Route::patch('items/{item}', 'ItemsController@update');
-Route::delete('items', 'ItemsController@destroy');
+Route::delete('items/{item}', 'ItemsController@destroy');
 

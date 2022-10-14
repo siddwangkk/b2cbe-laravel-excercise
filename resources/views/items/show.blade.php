@@ -13,11 +13,17 @@
 
     <div class="row">
         <div class="col-12">
-            <p><strong>Name</strong> {{$item->name}}</p>
-            <p><strong>Email</strong> {{$item->url}}</p>
-            <p><strong>Price</strong> {{$item->price}}</p>
-            <p><strong>Quantity</strong> {{$item->qty}}</p>
+            <p><strong>Name: </strong> {{$item->name}}</p>
+            <p><strong>Email: </strong> {{$item->url}}</p>
+            <p><strong>Price: </strong> {{$item->price}}</p>
+            <p><strong>Quantity: </strong> {{$item->qty}}</p>
         </div>
     </div>
+
+    <form action="/items/{{ $item->id }}" method="POST">
+        @method('DELETE')
+        @csrf
+        <button type="submit" class="btn-outline-warning">Delete</button>
+    </form>
 
 @endsection
