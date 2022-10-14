@@ -28,7 +28,6 @@ class ItemsController extends Controller
 
     public function show(Item $item)
     {
-
         return view('items.show', compact('item'));
     }
 
@@ -50,6 +49,13 @@ class ItemsController extends Controller
 
         return redirect('items');
     }
+
+    public function clean()
+    {
+        Item::query()->truncate();
+        return redirect('items');
+    }
+
 
     private function validateRequest()
     {

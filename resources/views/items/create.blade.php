@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="row">
+    <div class="row pb-4">
         <div class="col-12">
             <h1>Add New Item</h1>
         </div>

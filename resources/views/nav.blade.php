@@ -1,3 +1,9 @@
+<div class="d-flex">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 <ul class="nav py-3">
     <li class="nav-item">
         <a class="nav-link active" href="/">Home</a>
