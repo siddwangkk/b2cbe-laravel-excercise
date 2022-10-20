@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="/items" method="POST">
+            <form action="/api/v1/items" method="POST">
                 @include('items.form')
                     <button type="submit" class="btn btn-primary">Add Item</button>
             </form>

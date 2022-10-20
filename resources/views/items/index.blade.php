@@ -24,7 +24,7 @@
             <tr class="pb-3">
                 <td>{{ $item->id }}</td>
                 <td>
-                    <a href="/items/{{$item->id}}">
+                    <a href="/api/v1/items/{{$item->id}}">
                         {{ $item->name }}
                     </a>
                 </td>
@@ -40,7 +40,7 @@
         <form action="/items/create">
             <button class="btn btn-dark">Add Item</button>
         </form>
-        <form action="/items" method="POST">
+        <form action="/api/v1/items" method="POST">
             @method("DELETE")
             @csrf
             <button type="submit" class="btn btn-danger">Delete All</button>
