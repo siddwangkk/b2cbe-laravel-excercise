@@ -27,4 +27,5 @@ Route::patch('customers/{customer}','CustomersController@update');
 // items page route
 Route::get('items', 'ItemsController@index');
 Route::get('items/create', 'ItemsController@create');
+Route::get('items/{item}', 'ItemsController@show');
 Route::get('items/{item}/edit', 'ItemsController@edit');

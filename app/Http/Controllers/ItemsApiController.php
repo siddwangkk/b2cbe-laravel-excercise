@@ -74,7 +74,7 @@ class ItemsApiController extends Controller
     {
         $item->delete();
 
-        return request()->json(['status' => 'success']);
+        return response()->json(['status' => 'success']);
     }
 
     /**
@@ -85,7 +85,8 @@ class ItemsApiController extends Controller
     {
         Item::query()->truncate();
 
-        return request()->json(['status'=>'success']);
+        return response()->json(['status'=>'success']);
+
     }
 
     /**

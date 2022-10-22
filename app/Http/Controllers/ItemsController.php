@@ -14,58 +14,20 @@ class ItemsController extends Controller
         return view('items.index', compact('items'));
     }
 
-
     public function create(Item $item)
     {
         return view('items.create', compact('item'));
     }
 
-//    public function store()
-//    {
-//        Item::query()->create($this->validateRequest());
-//
-//        return redirect('items');
-//    }
+    public function show(Item $item)
+    {
 
-//    public function show(Item $item)
-//    {
-//
-//        return $item;
-//    }
+        return view('items.show', compact('item'));
+    }
 
     public function edit(Item $item)
     {
         return view('items.edit', compact('item'));
     }
 
-//    public function  update(Item $item)
-//    {
-//        $item->update($this->validateRequest());
-//
-//        return redirect('/items/'. $item->id);
-//    }
-
-//    public function destroy(Item $item)
-//    {
-//        $item->delete();
-//
-//        return redirect('items');
-//    }
-//
-//    public function clean()
-//    {
-//        Item::query()->truncate();
-//        return redirect('items');
-//    }
-//
-//
-//    private function validateRequest()
-//    {
-//        return request()->validate([
-//            'name' => 'required',
-//            'url' => 'required|URL',
-//            'price' => 'required|numeric',
-//            'qty' => 'required|numeric'
-//        ]);
-//    }
 }
