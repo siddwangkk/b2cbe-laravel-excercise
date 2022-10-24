@@ -19,7 +19,7 @@ const renderItemDetail = (item) => {
         return  window.location = "/404.html"
     }
     const bodyFragment = new DocumentFragment()
-    
+
     const titleDiv = document.createElement('div')
     titleDiv.classList.add('row','mb-4')
     titleDiv.innerHTML =

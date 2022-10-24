@@ -31,7 +31,7 @@ class ItemsApiController extends Controller
     {
         $item = Item::query()->create($this->validateRequest());
 
-        return response()->json(['id' => $item->id]);
+        return response()->json(['data' => ['id' => $item->id]]);
 
     }
 

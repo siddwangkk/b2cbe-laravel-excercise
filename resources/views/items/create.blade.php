@@ -12,10 +12,13 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="/api/v1/items" method="POST">
+            <form id="new-item-form" >
                 @include('items.form')
-                    <button type="submit" class="btn btn-primary">Add Item</button>
+                    <button id="new-item-btn" type="submit" class="btn btn-primary">Add Item</button>
             </form>
         </div>
     </div>
+
+    <script type="text/javascript" src="{{asset('js/create.js')}}"></script>
+
 @endsection
