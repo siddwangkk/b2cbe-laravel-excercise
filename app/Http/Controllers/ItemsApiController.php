@@ -70,9 +70,9 @@ class ItemsApiController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($item)
+    public function destroy($id)
     {
-        $item->delete();
+        $res=Item::where('id',$id)->delete();
 
         return response()->json(['status' => 'success']);
     }

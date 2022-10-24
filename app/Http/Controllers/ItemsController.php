@@ -19,10 +19,10 @@ class ItemsController extends Controller
         return view('items.create', compact('item'));
     }
 
-    public function show(Item $item)
+    public function show()
     {
 
-        return view('items.show', compact('item'));
+        return view('items.show');
     }
 
     public function edit(Item $item)
