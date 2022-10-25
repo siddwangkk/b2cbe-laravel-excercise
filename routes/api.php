@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use app\Http\Controllers\ItemsApiController;
+use app\Http\Controllers\ExchangeApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function() {
     Route::apiResource('items', 'ItemsApiController');
     Route::delete('items', 'ItemsApiController@clean');
+    Route::apiResource('exchange', 'ExchangeApiController')->only(['index', 'show']);
 });

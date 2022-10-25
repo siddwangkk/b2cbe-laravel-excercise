@@ -16,7 +16,7 @@
                 <th class="col-1 h5 text-white text-center" style="width: 2%;">
                     <input id="select-all" type="checkbox" onclick="toggle(this)">
                 </th>
-                <th class="col-1 h5 text-white text-center">Item ID</th>
+                <th class="col-1 h5 text-white text-center">ID</th>
                 <th class="col-1 h5 text-white text-center">Name</th>
                 <th class="col-1 h5 text-white text-center">URL</th>
                 <th class="col-1 h5 text-white text-end">Price(USD)</th>

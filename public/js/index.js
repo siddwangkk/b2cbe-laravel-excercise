@@ -99,18 +99,18 @@ const showTotalUSD = () => {
 }
 
 const getExchangeRate = async() => {
-    const fetchResult = await fetch('/api/v1/rate')
+    const fetchResult = await fetch('/api/v1/exchange')
     const jsonResult = await fetchResult.json()
 
-    return jsonResult
+    return JSON.parse(jsonResult).data
 }
 
-const renderCalculator = () => {
+const renderCalculator = async () => {
     const totalUSD = sumSelectItemsUSD()
-    // const rate = getExchangeRate()
-
+    const currencies = await getExchangeRate()
+    const twdRate = currencies.filter( currency => currency.code === 'TWD')[0].rate
     const exchangeDiv = document.getElementById('total-exchange')
-    exchangeDiv.textContent = `exchange to NTD: `
+    exchangeDiv.textContent = `exchange to NTD: ${Math.floor(parseFloat(totalUSD) * parseFloat(twdRate))}`
 
 }
 $('#delete-all-btn').on('click', deleteAllItems)
