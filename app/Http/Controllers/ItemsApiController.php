@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Item;
+use App\Http\Requests\ItemRequest;
 
 class ItemsApiController extends Controller
 {
@@ -16,22 +18,30 @@ class ItemsApiController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
+        $items = DB::table('items')
+            ->orderBy('id', 'asc')
+            ->get();
 
-        return response()->json(['data' => $items]);
+        return response()->json([
+            'success' => true,
+            'data' => $items
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  APP\Http\Requests\ItemRequest  $request
      * @return Response
      */
-    public function store()
+    public function store(ItemRequest $request)
     {
-        $item = Item::query()->create($this->validateRequest());
+        $item = Item::query()->create($request->validated());
 
-        return response()->json(['data' => ['id' => $item->id]]);
+        return response()->json([
+            'success' => true,
+            'data' => ['id' => $item->id]
+        ]);
 
     }
 
@@ -46,10 +56,16 @@ class ItemsApiController extends Controller
         $item = Item::find($id);
 
         if (!$item) {
-            return response()->json(['data'=>['error' => 'item not found']]);
+            return response()->json([
+                'success' => false,
+                'message' => 'query result error',
+                'data' => ['error' => 'item not found']]);
         }
 
-        return response()->json(['data'=>$item]);
+        return response()->json([
+            'success' => true,
+            'data' => $item
+        ]);
     }
 
     /**
@@ -59,9 +75,11 @@ class ItemsApiController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, $id)
     {
-        return ;
+        Item::where('id',$id)->update(array_slice($request->all(), 0, 4));
+
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -72,9 +90,9 @@ class ItemsApiController extends Controller
      */
     public function destroy($id)
     {
-        $res=Item::where('id',$id)->delete();
+        $res = Item::where('id',$id)->delete();
 
-        return response()->json(['status' => 'success']);
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -85,20 +103,7 @@ class ItemsApiController extends Controller
     {
         Item::query()->truncate();
 
-        return response()->json(['status'=>'success']);
+        return response()->json(['success' => true]);
 
-    }
-
-    /**
-     *  Define validated format of request data.
-     */
-    private function validateRequest()
-    {
-        return request()->validate([
-            'name' => 'required',
-            'url' => 'required|URL',
-            'price' => 'required|numeric',
-            'qty' => 'required|numeric'
-        ]);
     }
 }

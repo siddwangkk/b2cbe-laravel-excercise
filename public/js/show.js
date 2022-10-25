@@ -11,15 +11,16 @@ const getItemDetail = async () => {
     const fetchResult = await fetch(`/api/v1/items/${itemId}`)
     const jsonResult = await fetchResult.json()
 
+    if (!jsonResult.success) {
+        return  window.location = "/404.html"
+    }
+
     return jsonResult.data
 }
 
 const renderItemDetail = (item) => {
-    if ("error" in item) {
-        return  window.location = "/404.html"
-    }
-    const bodyFragment = new DocumentFragment()
 
+    const bodyFragment = new DocumentFragment()
     const titleDiv = document.createElement('div')
     titleDiv.classList.add('row','mb-4')
     titleDiv.innerHTML =
@@ -37,21 +38,24 @@ const renderItemDetail = (item) => {
                 <p className="h5 pb-3"><strong>Name: </strong> ${item.name}</p>
                 <p className="h5 pb-3"><strong>URL: </strong><a href="${item.url}" target="_blank">${item.url}</a>
                 </p>
-                <p className="h5 pb-3"><strong>Price: </strong>${item.price}</p>
+                <p className="h5 pb-3"><strong>Price(USD): </strong>$ ${parseFloat(item.price).toLocaleString('en')}</p>
                 <p className="h5 pb-3"><strong>Quantity: </strong>${item.qty}</p>
                 <p className="h6 pb-3" style="color: gray;"><strong>Created Time: </strong>${item.created_at}</p>
-                <p className="h6 pb-3" style="color: gray;"><strong>Update Time: </strong> ${item.updated_at}}</p>
+                <p className="h6 pb-3" style="color: gray;"><strong>Update Time: </strong>${item.updated_at}</p>
             </div>
         </div>
         `
     const buttonDiv = document.createElement('div')
     buttonDiv.classList.add('d-flex','justify-content-between')
     buttonDiv.innerHTML = `
-        <button id="edit-item-btn" type="submit" class="btn btn-dark" style="width:75px;">Edit</button>
-        <button id="delete-item-btn" type="submit" class="btn btn-danger">Delete</button>
+        <button id="edit-item-btn"  class="btn btn-dark" style="width:75px;">Edit</button>
+        <button id="delete-item-btn"  class="btn btn-danger">Delete</button>
     `
 
     bodyFragment.append(titleDiv, detailDiv, buttonDiv)
+
+    document.title = `Detail for ${item.name}`
+    $('#banner-title').text(`Edit Detail for ${item.name}`)
     $('.container').append(bodyFragment)
     $('#edit-item-btn').click('on', goToEditPage)
     $('#delete-item-btn').click('on', deleteItem)

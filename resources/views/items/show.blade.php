@@ -1,13 +1,8 @@
 @extends('layout')
 
-{{--@section('title', 'Detail for ' . $item->name)--}}
+@section('title', 'Detail for')
 
-@section('content')
-
-
-
-
-
+@section('script')
     <script type="text/javascript" src="{{asset('js/show.js')}}"></script>
-
 @endsection
+

@@ -19,6 +19,8 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="{{asset('js/create.js')}}"></script>
+@endsection
 
+@section('script')
+    <script type="module" src="{{asset('js/create.js')}}"></script>
 @endsection

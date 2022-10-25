@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('url');
-            $table->integer('price');
+            $table->decimal('price', 8,2);
             $table->integer('qty');
             $table->timestamps();
         });

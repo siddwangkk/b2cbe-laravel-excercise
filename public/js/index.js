@@ -13,23 +13,34 @@ const renderAllItems = (items) => {
         const rowDiv = document.createElement('tr')
         rowDiv.classList.add('pb-3')
         rowDiv.innerHTML = `
-            <td>${item.id}</td>
-            <td>
+            <td class="text-center"><input class="form-check-input" type="checkbox" name="item" data-value="${item.price}"></td>
+            <td class="text-center">${item.id}</td>
+            <td class="text-center">
                 <a href="/items/${item.id}"> ${item.name}</a>
             </td>
             <td>
                 <a href="${item.url}" target="_blank"> ${item.url}</a>
             </td>
-            <td>${item.price}</td>
-            <td>${item.qty}</td>
+            <td class="d-flex justify-content-between">
+                <p class="mb-0 ms-3">$</p>
+                <p class="text-end mb-0">${parseFloat(item.price).toLocaleString('en')}</p>
+                </td>
+            <td class="text-center">${item.qty}</td>
         `
         itemsFragment.append(rowDiv)
     })
     $('#items-tbody').append(itemsFragment)
+    const checkboxs = document.getElementsByName('item')
+    checkboxs.forEach(checkbox => {
+        checkbox.addEventListener('click', showTotalUSD)
+    })
+
 }
 
 const renderIndexPage = async () => {
     const items = await getAllItems()
+    const selectAll = document.getElementById('select-all')
+    selectAll.addEventListener('click', showTotalUSD)
     renderAllItems(items)
 }
 
@@ -64,7 +75,48 @@ const goToCreatePage = async(e) => {
     return window.location = "/items/create"
 }
 
+const toggle = (source) => {
+
+    const checkboxes = document.getElementsByName('item');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked
+    })
+}
+
+const sumSelectItemsUSD = () => {
+    const items =  Array.from(document.getElementsByName('item'))
+    const totalUSD = items.reduce( (acc, cur) => {
+        if (cur.checked) acc += parseFloat(cur.dataset.value.replace(',', ''))
+        return acc
+    }, 0)
+    return totalUSD.toFixed(2)
+}
+
+const showTotalUSD = () => {
+    const totalUSD = sumSelectItemsUSD()
+    const totalDiv = document.getElementById('total-usd')
+    totalDiv.textContent = `Total USD: ${totalUSD}`
+}
+
+const getExchangeRate = async() => {
+    const fetchResult = await fetch('/api/v1/rate')
+    const jsonResult = await fetchResult.json()
+
+    return jsonResult
+}
+
+const renderCalculator = () => {
+    const totalUSD = sumSelectItemsUSD()
+    // const rate = getExchangeRate()
+
+    const exchangeDiv = document.getElementById('total-exchange')
+    exchangeDiv.textContent = `exchange to NTD: `
+
+}
 $('#delete-all-btn').on('click', deleteAllItems)
 $('#add-item-btn').on('click', goToCreatePage)
+$('#calculate-btn').on('click', renderCalculator)
+
 
 renderIndexPage()
+
