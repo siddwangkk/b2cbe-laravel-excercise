@@ -34,4 +34,9 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'svc-common' => [
+        'domain' => env('GMBE_SDK_COMMON_SVC_DOMAIN'),
+        'x-api-key' => env('GMBE_SDK_COMMON_SVC_KEY'),
+    ],
+
 ];

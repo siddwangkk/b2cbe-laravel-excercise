@@ -98,6 +98,7 @@ const showTotalUSD = () => {
     const totalUSD = sumSelectItemsUSD()
     const totalDiv = document.getElementById('total-usd')
     const totletitle = document.getElementById('total-title')
+
     totletitle.innerHTML = 'Total&nbsp;&nbsp;&nbsp;USD'
     totalDiv.textContent = totalUSD
 }
@@ -106,7 +107,7 @@ const getExchangeRate = async() => {
     const fetchResult = await fetch('/api/v1/exchange')
     const jsonResult = await fetchResult.json()
 
-    return JSON.parse(jsonResult).data
+    return jsonResult.data
 }
 
 const setCurrencyCodeOption = async () => {
@@ -126,13 +127,11 @@ const setCurrencyCodeOption = async () => {
 
 const renderCalculator = async () => {
     const totalUSD = sumSelectItemsUSD()
-    // const currencies = await getExchangeRate()
-    // const twdRate = currencies.filter( currency => currency.code === 'TWD')[0].rate
     const exchangeDiv = document.getElementById('total-exchange')
     const exchangeTitle = document.getElementById('exchange-title')
     const currency = document.getElementById('currency-code')
-    // console.log(currency.selectIndex)
     const currencyCode = currency.options[currency['selectedIndex']].text
+
     exchangeTitle.innerHTML = `------->&nbsp;&nbsp;&nbsp;&nbsp;${currencyCode} `
     exchangeDiv.textContent = Math.floor(parseFloat(totalUSD) * parseFloat(currency.value))
 

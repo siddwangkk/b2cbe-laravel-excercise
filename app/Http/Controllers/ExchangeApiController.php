@@ -22,19 +22,16 @@ class ExchangeApiController extends Controller
         $cache = Redis::get('currencies');
 
         if (!$cache) {
-            $client = new GuzzleHttp\Client();
-            $res = $client->request('GET', 'https://svc-common.sit.kkday.com/api/v1/currencies');
-            $currencies = $res->getBody()->getContents();
 
-//            $currency = $svcCommon->get('/api/v1/currencies' );
+            $currencies = $svcCommon->get('currencies' );
+            Redis::set('currencies', json_encode($currencies), 'EX', 3600);
 
-            Redis::set('currencies', $currencies);
             return response()->json($currencies);
         }
 
         $currencies = Redis::get('currencies');
 
-        return response()->json($currencies);
+        return response()->json(json_decode($currencies));
     }
 
     /**
