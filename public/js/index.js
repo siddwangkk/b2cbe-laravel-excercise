@@ -13,7 +13,8 @@ const renderAllItems = (items) => {
         const rowDiv = document.createElement('tr')
         rowDiv.classList.add('pb-3')
         rowDiv.innerHTML = `
-            <td class="text-center"><input class="form-check-input" type="checkbox" name="item" data-value="${item.price}"></td>
+            <td class="text-center"><input class="form-check-input"
+                type="checkbox" name="item" data-value="${item.price}" data-qty="${item.qty}"></td>
             <td class="text-center">${item.id}</td>
             <td class="text-center">
                 <a href="/items/${item.id}"> ${item.name}</a>
@@ -42,6 +43,7 @@ const renderIndexPage = async () => {
     const selectAll = document.getElementById('select-all')
     selectAll.addEventListener('click', showTotalUSD)
     renderAllItems(items)
+    setCurrencyCodeOption()
 }
 
 const deleteAllItems = async (e) => {
@@ -86,7 +88,7 @@ const toggle = (source) => {
 const sumSelectItemsUSD = () => {
     const items =  Array.from(document.getElementsByName('item'))
     const totalUSD = items.reduce( (acc, cur) => {
-        if (cur.checked) acc += parseFloat(cur.dataset.value.replace(',', ''))
+        if (cur.checked) acc += parseFloat(cur.dataset.value.replace(',', '')) * parseFloat(cur.dataset.qty)
         return acc
     }, 0)
     return totalUSD.toFixed(2)
@@ -95,7 +97,9 @@ const sumSelectItemsUSD = () => {
 const showTotalUSD = () => {
     const totalUSD = sumSelectItemsUSD()
     const totalDiv = document.getElementById('total-usd')
-    totalDiv.textContent = `Total USD: ${totalUSD}`
+    const totletitle = document.getElementById('total-title')
+    totletitle.innerHTML = 'Total&nbsp;&nbsp;&nbsp;USD'
+    totalDiv.textContent = totalUSD
 }
 
 const getExchangeRate = async() => {
@@ -105,14 +109,35 @@ const getExchangeRate = async() => {
     return JSON.parse(jsonResult).data
 }
 
+const setCurrencyCodeOption = async () => {
+    const currencies = await getExchangeRate()
+    const currencyCode = currencies.map(currency => {
+        return {code: currency.code, rate: currency.rate}
+    })
+    const selectFagment = new DocumentFragment()
+    currencyCode.forEach(currency => {
+        const codeOption = document.createElement('option')
+        codeOption.value = currency.rate
+        codeOption.textContent = currency.code
+        selectFagment.append(codeOption)
+    })
+    $('#currency-code').append(selectFagment)
+}
+
 const renderCalculator = async () => {
     const totalUSD = sumSelectItemsUSD()
-    const currencies = await getExchangeRate()
-    const twdRate = currencies.filter( currency => currency.code === 'TWD')[0].rate
+    // const currencies = await getExchangeRate()
+    // const twdRate = currencies.filter( currency => currency.code === 'TWD')[0].rate
     const exchangeDiv = document.getElementById('total-exchange')
-    exchangeDiv.textContent = `exchange to NTD: ${Math.floor(parseFloat(totalUSD) * parseFloat(twdRate))}`
+    const exchangeTitle = document.getElementById('exchange-title')
+    const currency = document.getElementById('currency-code')
+    // console.log(currency.selectIndex)
+    const currencyCode = currency.options[currency['selectedIndex']].text
+    exchangeTitle.innerHTML = `------->&nbsp;&nbsp;&nbsp;&nbsp;${currencyCode} `
+    exchangeDiv.textContent = Math.floor(parseFloat(totalUSD) * parseFloat(currency.value))
 
 }
+
 $('#delete-all-btn').on('click', deleteAllItems)
 $('#add-item-btn').on('click', goToCreatePage)
 $('#calculate-btn').on('click', renderCalculator)

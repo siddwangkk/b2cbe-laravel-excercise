@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <table class="table mb-5" >
+    <table class="table mb-4" >
         <thead class="thead-dark">
             <tr class="tr thead-dark" style="background-color: #1b1e21">
                 <th class="col-1 h5 text-white text-center" style="width: 2%;">
@@ -26,19 +26,25 @@
         <tbody id="items-tbody">
         </tbody>
     </table>
+    <div class="d-flex justify-content-ar mb-5">
+        <div class="d-flex me-2"><select id="currency-code" class="form-select align-self-center" style="width:95px;"></select></div>
+        <div class="d-flex me-auto"><button id="calculate-btn" class="btn btn-outline-success align-self-center">Calculate</button></div>
+        <table id="exchange" class="mb-0 align-self-center" style="width:250px; margin-right: 145px;">
+            <tr>
+                <td id="total-title" class="text-end"></td>
+                <td id="total-usd" class="text-end"></td>
+            </tr>
+            <tr>
+                <td id="exchange-title" class="text-end"></td>
+                <td id="total-exchange" class="text-end"></td>
+            </tr>
+        </table>
+    </div>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mt-5">
         <button id="add-item-btn" class="btn btn-dark me-2">Add Item</button>
-        <button id="calculate-btn" class="btn btn-outline-success me-2">Calculate</button>
-        <div id="exchange" class="me-auto mb-0 align-self-center">
-            <div id="total-usd" class="align-self-center"></div>
-            <div id="total-exchange" class="align-self-center"></div>
-        </div>
         <button id="delete-all-btn" class="btn btn-danger">Delete All</button>
     </div>
-    <div id="avc"></div>
-
-{{--    <div id="exchange">Total USD: <p id="total-usd"></p>></div>--}}
 
 @endsection
 
