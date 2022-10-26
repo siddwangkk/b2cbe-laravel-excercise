@@ -24,14 +24,8 @@ Route::get('customers/{customer}','CustomersController@show');
 Route::get('customers/{customer}/edit','CustomersController@edit');
 Route::patch('customers/{customer}','CustomersController@update');
 
-// items route
-//Route::get('items', 'ItemsController@index');
-//Route::get('items/create', 'ItemsController@create');
-//Route::post('items', 'ItemsController@store');
-//Route::get('items/{item}', 'ItemsController@show');
-//Route::get('items/{item}/edit', 'ItemsController@edit');
-//Route::patch('items/{item}', 'ItemsController@update');
-//Route::delete('items/{item}', 'ItemsController@destroy');
-
-Route::resource('items', 'ItemsController');
-Route::delete('items', 'ItemsController@clean');
+// items page route
+Route::get('items', 'ItemsController@index');
+Route::get('items/create', 'ItemsController@create');
+Route::get('items/{item}', 'ItemsController@show');
+Route::get('items/{item}/edit', 'ItemsController@edit');

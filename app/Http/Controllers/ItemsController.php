@@ -9,61 +9,22 @@ class ItemsController extends Controller
 {
     public function index()
     {
-        $items = Item::all();
-
-        return view('items.index', compact('items'));
+        return view('items.index');
     }
 
-    public function create(Item $item)
+    public function create()
     {
-        return view('items.create', compact('item'));
+        return view('items.create');
     }
 
-    public function store()
+    public function show()
     {
-        Item::query()->create($this->validateRequest());
-
-        return redirect('items');
+        return view('items.show');
     }
 
-    public function show(Item $item)
+    public function edit()
     {
-        return view('items.show', compact('item'));
+        return view('items.edit');
     }
 
-    public function edit(Item $item)
-    {
-        return view('items.edit', compact('item'));
-    }
-
-    public function  update(Item $item)
-    {
-        $item->update($this->validateRequest());
-
-        return redirect('/items/'. $item->id);
-    }
-
-    public function destroy(Item $item)
-    {
-        $item->delete();
-
-        return redirect('items');
-    }
-
-    public function clean()
-    {
-        Item::query()->truncate();
-        return redirect('items');
-    }
-
-
-    private function validateRequest()
-    {
-        return request()->validate([
-            'name' => 'required',
-            'url' => 'required|URL',
-            'price' => 'required|numeric',
-            'qty' => 'required|numeric'
-        ]);
-    }
 }
